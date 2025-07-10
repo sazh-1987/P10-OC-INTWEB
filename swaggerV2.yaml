@@ -1,0 +1,188 @@
+swagger: "2.0"
+info:
+  title: Argent Bank Transaction API
+  description: API dédiée aux opérations sur les transactions des utilisateurs
+  version: 2.0.0
+  termsOfService: http://swagger.io/terms/
+host: localhost:3001
+basePath: /api/v2
+schemes:
+  - http
+
+paths:
+  /user/transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions
+      summary: Récupère toutes les transactions du mois en cours
+      description: Retourne la liste des transactions pour tous les comptes de l’utilisateur
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          type: string
+          description: Token JWT Bearer
+      responses:
+        "200":
+          description: Transactions récupérées
+          schema:
+            $ref: "#/definitions/allTransactionsResponse"
+        "401":
+          description: Non autorisé
+        "404":
+          description: Aucune transaction trouvée
+
+  /user/transaction/{idTransaction}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions
+      summary: Détail d'une transaction
+      parameters:
+        - in: path
+          name: idTransaction
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Détail de la transaction
+          schema:
+            $ref: "#/definitions/ApiTransactionResponse"
+        "404":
+          description: Transaction introuvable
+
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions
+      summary: Met à jour une transaction (catégorie et/ou note)
+      parameters:
+        - in: path
+          name: idTransaction
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/editTransaction"
+      responses:
+        "200":
+          description: Transaction mise à jour
+
+  /user/transaction/{idTransaction}/note:
+    post:
+      tags:
+        - Transactions
+      summary: Ajoute une note à une transaction
+      parameters:
+        - in: path
+          name: idTransaction
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              notes:
+                type: string
+      responses:
+        "200":
+          description: Note ajoutée
+
+    delete:
+      tags:
+        - Transactions
+      summary: Supprime la note d'une transaction
+      parameters:
+        - in: path
+          name: idTransaction
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Note supprimée
+
+  /user/transaction/{idTransaction}/category:
+    post:
+      tags:
+        - Transactions
+      summary: Ajoute une catégorie à une transaction
+      parameters:
+        - in: path
+          name: idTransaction
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              category:
+                type: string
+      responses:
+        "200":
+          description: Catégorie ajoutée
+
+    delete:
+      tags:
+        - Transactions
+      summary: Supprime la catégorie d'une transaction
+      parameters:
+        - in: path
+          name: idTransaction
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Catégorie supprimée
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+definitions:
+  allTransactionsResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        additionalProperties:
+          $ref: "#/definitions/ApiTransactionResponse"
+
+  ApiTransactionResponse:
+    type: object
+    properties:
+      id:
+        type: string
+      date:
+        type: string
+      amount:
+        type: number
+      description:
+        type: string
+      category:
+        type: string
+      notes:
+        type: string
+
+  editTransaction:
+    type: object
+    properties:
+      category:
+        type: string
+      notes:
+        type: string
