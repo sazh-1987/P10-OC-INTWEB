@@ -1,4 +1,4 @@
-function InputField({ id, label, type = "text", value, onChange, disabled = false, className = "" }) {
+function InputField({ id, label, type = "text", value, onChange, disabled = false, className = "", autoComplete }) {
     return (
         <div className={`input-wrapper ${className}`}>
             <label htmlFor={id}>{label}</label>
@@ -7,6 +7,7 @@ function InputField({ id, label, type = "text", value, onChange, disabled = fals
                 type={type}
                 value={value}
                 onChange={onChange}
+                autoComplete={autoComplete}
                 disabled={disabled}
             />
         </div>

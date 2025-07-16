@@ -20,10 +20,10 @@ function User() {
 
     /* Chargement du profil */
     useEffect(() => {
-        if (token) {
+        if (token && !userData.userName) {
             dispatch(fetchUserProfile(token))
         }
-    }, [token, dispatch])
+    }, [token, userData.userName, dispatch])
 
     /* État local d’édition */
     const [editMode, setEditMode] = useState(false)

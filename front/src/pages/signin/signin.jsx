@@ -39,6 +39,7 @@ function Signin() {
                     label="Username"
                     type="email"
                     id="username"
+                    autoComplete="username"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -46,6 +47,7 @@ function Signin() {
                     label="Password"
                     type="password"
                     id="password"
+                    autoComplete="current-password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />

@@ -31,11 +31,11 @@ export const loginUser = ({ email, password, rememberMe }) => async (dispatch) =
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
         })
-        if (!response.ok) throw new Error("Invalid credentials")
+        if (!response.ok) throw new Error("Email ou mot de passe incorrect")
         const data  = await response.json()
         const token = data.body.token
 
-        // ✅ Sauvegarde le token si rememberMe
+        // Sauvegarde le token si rememberMe
         if (rememberMe) {
          localStorage.setItem("token", token)
         }
