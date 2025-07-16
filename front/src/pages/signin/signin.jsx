@@ -67,6 +67,7 @@ function Signin() {
                     type="submit"
                     className="sign-in-button"
                     loading={status === 'PENDING'}
+                    disabled={!email || !password}
                     >
                     Sign In
                 </LoaderButton>

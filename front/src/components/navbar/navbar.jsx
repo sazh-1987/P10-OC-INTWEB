@@ -42,7 +42,7 @@ function Navbar() {
                     </>
                 ) : (
                     <NavLink className="main-nav-item" to="/signin">
-                        Sign In
+                        <i className="fa fa-user-circle"></i> Sign In
                     </NavLink>
                 )}
             </div>

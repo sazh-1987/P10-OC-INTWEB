@@ -96,17 +96,17 @@ function User() {
                 />
 
 
-            <AccountCard
-                title="Argent Bank Savings (x6712)"
-                amount="$10,928.42"
-                description="View transactions"
-            />
+                <AccountCard
+                    title="Argent Bank Savings (x6712)"
+                    amount="$10,928.42"
+                    description="View transactions"
+                />
 
-            <AccountCard
-                title="Argent Bank Credit Card (x8349)"
-                amount="$184.30"
-                description="Current Balance"
-            />
+                <AccountCard
+                    title="Argent Bank Credit Card (x8349)"
+                    amount="$184.30"
+                    description="Current Balance"
+                />
         </main>
     )
 }

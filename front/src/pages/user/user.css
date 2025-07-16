@@ -59,3 +59,13 @@
 .cancel-button:hover {
     opacity: 0.9;
 }
+
+@media (max-width: 768px) {
+    .edit-user-form {
+        padding: 0 1rem;
+    }
+
+    .input-wrapper input {
+        width: 100%;
+    }
+}
