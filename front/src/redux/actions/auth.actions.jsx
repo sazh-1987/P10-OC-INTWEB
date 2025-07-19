@@ -24,6 +24,12 @@ export const logout = () => {
 
 
 export const loginUser = ({ email, password, rememberMe }) => async (dispatch) => {
+
+    if (!email.trim() || !password.trim()) {
+        console.warn("Champs email ou mot de passe vide")
+        return
+    }
+
     dispatch({ type: LOGIN_REQUEST })               // status: PENDING
     try {
         const response = await fetch("http://localhost:3001/api/v1/user/login", {
